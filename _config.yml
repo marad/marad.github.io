@@ -1,10 +1,7 @@
 # Site settings
 title: Marad Blog
 email: moriturius@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+timezone: Europe/Warsaw
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://blog.radoszewski.pl" # the base hostname & protocol for your site
 twitter_username: moriturius
@@ -12,3 +9,28 @@ github_username:  marad
 
 # Build settings
 markdown: kramdown
+
+permalink: date
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "drafts"
+    values:
+      author: "marad"
+      layout: "post"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      author: "marad"
+      layout: "post"
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      author: "marad"
+      layout: "page"
