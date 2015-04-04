@@ -45,6 +45,9 @@ img {
     vertical-align: middle;
 }
 
+img.logo {
+  padding: 5px;
+}
 
 
 /**
@@ -57,7 +60,6 @@ figure > img {
 figcaption {
     font-size: $small-font-size;
 }
-
 
 
 /**
@@ -98,7 +100,6 @@ a {
 
     &:hover {
         color: $text-color;
-        text-decoration: underline;
     }
 }
 
