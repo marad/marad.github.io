@@ -1,7 +1,7 @@
 # Site settings
 title: Marad Blog
-email: moriturius@gmail.com
-timezone: Europe/Warsaw
+email: moriturius (at) gmail.com
+#timezone: Europe/Warsaw
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://blog.radoszewski.pl" # the base hostname & protocol for your site
 twitter_username: moriturius
