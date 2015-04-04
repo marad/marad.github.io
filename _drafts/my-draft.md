@@ -9,13 +9,7 @@ This is sample post which is shown here and there!
 
 {% highlight scala linenos %}
 class C1 extends Component
+hello
+world
 {% endhighlight %}
-
-{{ page.date | date_to_string }}
-
-{{ page.tags | jsonify }}
-
-```scala
-class C1 extends Component
-```
 
