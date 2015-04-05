@@ -1,6 +1,8 @@
 ---
 title:  "Scalartemis"
 date:   2015-04-04 22:06:00
+tags: scala scalartemis
+categories: programming
 ---
 
 Recently I've been creating entity component framework which I named _Scalartemis_. Name is direct descendant of two words. First (surprisingly) is _Scala_ - the language it's written in. Second is _Artemis_.
