@@ -56,7 +56,7 @@ I was in High School. The time table was available online. Before leaving to sch
 </a>
 Download: [OGame Transporter][ogame-transporter]
 
-In high scool I've played OGame with my friends. Some tasks and calculations were repeatable. This tool was to help me quickly compute the amount of transporters to use when I wanted to transport the resources to another planet to build or research something there.
+In high school I've played OGame with my friends. Some tasks and calculations were repeatable. This tool was to help me quickly compute the amount of transporters to use when I wanted to transport the resources to another planet to build or research something there.
 
 It only worked with Polish OGame and now it doesn't work at all because of the GUI changes.
 
@@ -74,7 +74,7 @@ Creates a list of files and directories in given directory. You can also filter 
 <a href="http://i11.photobucket.com/albums/a192/doszes/coff2omf.png" data-lightbox="image-2" data-title="Coff2Omf">
   <img src="http://i11.photobucket.com/albums/a192/doszes/coff2omf.png" class="small">
 </a>
-This program was created as a GUI to Borlands coff2omf tool. It converted the library files from Microsoft's COFF format to Borlands OMF format.
+This program was created as a GUI to Borland's coff2omf tool. It converted the library files from Microsoft's COFF format to Borlands OMF format.
 
 <div style="clear:both"></div>
 
@@ -96,7 +96,7 @@ It's Polish only!
 </a>
 Download: [Color Palette][color-palette]
 
-This programs only purpose is to hold informations about colors. It might be useful to create customised color palette to use across your system. I personally used it with my Sprite Editor which is listed above.
+This programs only purpose is to hold informations about colors. It might be useful to create customized color palette to use across your system. I personally used it with my Sprite Editor which is listed above.
 
 [easyuo]: http://www.easyuo.com/
 [planner8lo]: http://www.mediafire.com/?5p1au4k9jmr
