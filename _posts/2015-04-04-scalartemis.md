@@ -7,7 +7,7 @@ categories: programming
 
 Recently I've been creating entity component framework which I named _Scalartemis_. Name is direct descendant of two words. First (surprisingly) is _Scala_ - the language it's written in. Second is _Artemis_.
 
-[Artemis][artemis] is entity component framework that I wanted to port to Scala. During the process of porting I started to change things a bit to achieve better performance/api/usability. At some point I decided that this is pointless and I should start from scratch using the knowlodge I've gained. This is exactly what I've done.
+[Artemis][artemis] is entity component framework that I wanted to port to Scala. During the process of porting I started to change things a bit to achieve better performance/api/usability. At some point I decided that this is pointless and I should start from scratch using the knowledge I've gained. This is exactly what I've done.
 
 I've found [document][fast-entity-system] which was the base for Artemis. Unfortunately its creators had not followed it closely. I think that there is room for improvements so I decided to give it a shot.
 
@@ -15,13 +15,13 @@ I've found [document][fast-entity-system] which was the base for Artemis. Unfort
 
 If you've ever tried to make a game you must have noticed that you should manage your game objects. You should be able to draw the elements that can be drawn but there could be also entities without graphic representation like some special areas. The entities differ from one another. Hero, bullet, and a gun are all entities but are entirely different. Hero does have stats like _health_ or _stamina_ but this is totally not applicable to his gun.
 
-Component Entity Frameworks are one way of dealing with this problem. They try to make entity as abstract as it can be and then add multiple components describing its properties. I've seen many implementations which tried to represent the _entity_ as a class which had list of components. One of the problems with this aproach is performance. Implementing this you would probably say _'RenderComponent is so common that I should make it special and available from the entity class without searching in the component list.'_. At least this is what I ended up with every time I tried to approach component entity systems.
+Component Entity Frameworks are one way of dealing with this problem. They try to make entity as abstract as it can be and then add multiple components describing its properties. I've seen many implementations which tried to represent the _entity_ as a class which had list of components. One of the problems with this approach is performance. Implementing this you would probably say _'RenderComponent is so common that I should make it special and available from the entity class without searching in the component list.'_. At least this is what I ended up with every time I tried to approach component entity systems.
 
 ### What is different from Artemis?
 
 While I liked the overall concept I didn't like the code that was written to satisfy it. The more I read the Artemis codebase the more I wanted to rewrite it from scratch. Starting from the beginning I've reimplemented almost completely (no entity tagging yet) Artemis and I believe I've cut number of classes in a half. We all know that the less code we have the less code can break ;)
 
-Also I've implemented everything using TDD so every functionality has it's unit test. This of course gives me very good indication wheather my changes break something somewhere or not :)
+Also I've implemented everything using TDD so every functionality has it's unit test. This of course gives me very good indication whether my changes break something somewhere or not :)
 
 
 ### Enough talking, show me the code!
