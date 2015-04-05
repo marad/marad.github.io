@@ -18,7 +18,7 @@ As mentioned above I like learning various programming languages. I've tried ver
 
 Below I listed my favorite languages/technologies/whatever:
 
-* Scala - this blog is written in Scala
+* Scala
 * Java - I'm working with it professionally since 2012
 * C/C++
 * SQL
