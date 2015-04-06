@@ -15,7 +15,7 @@ I've started creating a lot of games in my life. Few of them were playable. Ther
 
 ## Money Soccer
 <a href="http://i11.photobucket.com/albums/a192/doszes/money.png" data-lightbox="image-2" data-title="Money Soccer">
-  <img src="http://i11.photobucket.com/albums/a192/doszes/money.png" class="small">
+  <img src="http://i11.photobucket.com/albums/a192/doszes/money.png" class="small" alt="Money Soccer Screenshot">
 </a>
 Inspired with a game that we were playing at school desks I've created something like that in the virtual world. Rules are very simple. Each turn a player can use just one of the coins. He has to hit the coin so that it passes the line between the remaining two coins. If it does the player can do another move, but cannot use the same coin again. If the coin fails to pass the line between the remaining two - second player gets his move. Of course the goal is to score a goal :)
 
