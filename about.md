@@ -3,8 +3,11 @@ title: About
 permalink: /about/
 ---
 
-## Contact me at
-moriturius (at) gmail.com
+## Professional Experience
+
+I'm working professionally as Java developer since 2011. Currently I work for [Allegro
+Group][allegro]. It's the biggest online auctioning website in Poland. Previously I worked for
+smaller company named [AIS.PL][ais].
 
 ## Interests
 
@@ -27,3 +30,7 @@ Below I listed my favorite languages/technologies/whatever:
 * Python
 * Java Script
 * Assembler - mostly basics
+
+[allegro]: http://en.wikipedia.org/wiki/Allegro_(auction_website)
+[ais]: http://www.ais.pl
+
