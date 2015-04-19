@@ -10,7 +10,11 @@ permalink: /programs/
     margin: 5px;
   }
 </style>
-I've created tons of programs during my coding adventures. Unfortunately most of them wasn't finished or wasn't good enough to show it. In this section I'd like to present only a few of my programs.
+
+I've created tons of programs during my coding adventures. Unfortunately most of them wasn't
+finished or wasn't good enough to show it. In this section I'd like to present only a few of my
+programs. All this programs are very old! For my current creations please visit my [GitHub][github]
+page!
 
 ## Windows Manifest Utility
 <a href="http://i11.photobucket.com/albums/a192/doszes/wmu.png" data-lightbox="image-2" data-title="Windows Manifest Utility">
@@ -104,3 +108,4 @@ This programs only purpose is to hold informations about colors. It might be use
 [ogame]: http://pl.ogame.gameforge.com/
 [numerology]: http://www.mediafire.com/?81jglsbxs2t
 [color-palette]: http://www.mediafire.com/?7gzmmfjz8sg
+[github]: http://www.github.com/marad
