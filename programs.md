@@ -13,7 +13,9 @@ permalink: /programs/
 
 I've created tons of programs during my coding adventures. Unfortunately most of them wasn't
 finished or wasn't good enough to show it. In this section I'd like to present only a few of my
-programs. All this programs are very old! For my current creations please visit my [GitHub][github]
+programs.
+
+All this programs are very old! For my current creations please visit my [GitHub][github]
 page!
 
 ## Windows Manifest Utility
