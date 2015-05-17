@@ -62,7 +62,7 @@ be) so I'll skip this for now.
 
 The reality is that these laws are mainly important when you want to implement a monad yourself or
 you need to rely on one of these properties in your code. In fact when talking about monads most
-developers they're thinking just about generic type _M[T]_ with _unit_ and _flatMap_ operations.
+developers are thinking just about generic type _M[T]_ with _unit_ and _flatMap_ operations.
 
 There is even more! There are types that we call a monads but they do not satisfy those laws! Let's
 take `Try[T]` for example. This monad is used to deal with possible exceptions that might occur
@@ -85,7 +85,7 @@ The law works fine if everything goes smooth and no exception is thrown. The pro
 either `f` or `expr` throws an exception. The left hand side `Try(expr) flatMap f` never throws an
 exception and just returns `Failure(ex)`. The right hand side `f(expr)` will just throw the
 exception so the law does not hold thus `Try[T]` is not precisely a monad, but that is not a problem
-for us. We are not mathematicians. We just want things to work :)
+for us. We are not mathematicians (no offense ment!). We just want things to work :)
 
 # So what does all this means for developers?
 
