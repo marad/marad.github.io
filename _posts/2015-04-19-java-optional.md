@@ -6,7 +6,7 @@ tags: ["optional", "functional programming"]
 categories: programming java
 ---
 
-Recently I've been a part of self-educating team. My workmates and me decided to learn Java 8
+Recently I've been a part of self-educating team. My workmates and I decided to learn Java 8
 features so we could use it at work. Each of us have one or two topics to cover and we had to teach
 each other about the cool new features like streams or better type inference. My part was to
 cover the `Optional` class, and today I'd like to show and explain how and why you should use it.
