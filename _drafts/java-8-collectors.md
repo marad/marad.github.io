@@ -69,10 +69,133 @@ has. This is used to optimize collecting the stream. We can return there a set o
 * CONCURRENT - This tells that the collector can be used with multiple threads.
 * IDENTITY_FINISH - This indicates that the intermediate type _A_ is the same as returned type _R_
 so there is no need to call `finisher()` method.
-* UNORDERED - Means that the order of elements is not important.
+* UNORDERED - Means that the order of elements is not important. This information can be used to
+optimize processing.
 
-What it gives us?
-How to create a collector?
+# Implement, all the collectors!
 
-bibliography
-http://www.nurkiewicz.com/2014/07/introduction-to-writing-custom.html
+Well, maybe let us choose one collector that we would like to have. Recently I've stumbled upon the
+problem of finding the most popular element in a collection. By most popular I mean the element that
+occurs the most. So in `a, a, a, b, b, c` the most popular is obviously `a` because it occurs three
+times.
+
+In terms of a collector. We want to collect the stream of type _X_ to single value of type
+_Optional<X>_. This value should be the most popular item. We use optional here because if we supply
+empty list then we do not have any most popular item there. As the intermediate I suggest using
+`Map<X, Integer>` to store elements and their occurrence count. I'll explain this in detail later.
+So the collector generic parameters should be `Collector<X, Map<X,Integer>, Optional<X>>`
+
+To implement the collector we can simply implement the interface:
+
+{% highlight java %}
+public class MostPopular<T> implements Collector<T, Map<T, Integer>, Optional<T>> {
+  // all the methods listed for collector above
+}
+{% endhighlight %}
+
+Now we can just implement the functions. Let's start with simple accumulator supplier:
+
+{% highlight java %}
+@Override
+public Supplier<Map<T, Integer>> supplier() {
+  return HashMap::new;
+}
+{% endhighlight %}
+
+Here we simply return the reference to the `HashMap` constructor as the supplier. Whenever the
+supplier method is called new `HashMap` will be created.
+
+Moving on, to the accumulator:
+
+{% highlight java %}
+@Override
+public BiConsumer<Map<T, Integer>, T> accumulator() {
+  return (acc, elem) -> {
+    Integer value = acc.get(elem);
+    if (value == null) {
+      value = 1;
+    } else {
+      value += 1;
+    }
+    acc.put(elem, value);
+  };
+}
+{% endhighlight %}
+
+This method should be used to add another element to our accumulator. In this implementation we
+simply fetch the occurrence count for this element from the map. If the value is `null` then this is
+the first occurrence and we set the value to 1. If the value is other than `null` then we simply add
+1 to this value, and lastly we store the value back in the map.
+
+This method gets called for every element. This means that after all elements are processed by this
+method we end up with the accumulator that have the mapping from the element to its occurrence
+times.
+
+Next on the list is the combiner method:
+
+{% highlight java %}
+@Override
+public BinaryOperator<Map<T, Integer>> combiner() {
+  return (acc1, acc2) -> {
+    throw new UnsupportedOperationException();
+  };
+}
+{% endhighlight %}
+
+Well... this is not what you expected at all. I can tell! Let me explain myself. The combiner method
+is used when the process can be parallelized. This method is here to merge processing results from
+different threads. Every thread gets part of the stream to collect, and at the end all the
+resulting accumulators are merged by this method. In this particular collector the implementation
+for this method can be a bit tricky, but is not crucial so I just let it go :)
+
+This method is not used unless you create `parallelStream()` instead of `stream()` from the
+collection.
+
+Let's almost finish with finisher:
+
+{% highlight java %}
+@Override
+public Function<Map<T, Integer>, Optional<T>> finisher() {
+  return (acc) -> acc.entrySet().stream()
+    .reduce((a, b) -> a.getValue() > b.getValue() ? a : b)
+    .map(Map.Entry::getKey);
+}
+{% endhighlight %}
+
+This implementation is pretty straight forward if you are used to the stream-way of processing data.
+We have our accumulator `acc` which is a map of elements with their occurrence count. We create a
+stream from this map's entry set and using reduce we find the value of type `Optional<Map.Entry<T,
+Integer>>` that represents the entry with the biggest occurrence value.
+
+As here we have got whole `Map.Entry<T, Integer>` but need only the key from the entry we simply use
+`map(Map.Entry::getKey)` on the optional value. This gives us exactly what we want - `Optional<T>`
+with the most popular value.
+
+Last method that we have to implement is the `characteristics()` method:
+
+{% highlight java %}
+@Override
+public Set<Characteristics> characteristics() {
+  return Collections.emptySet();
+}
+{% endhighlight %}
+
+Not very exciting but does the job. I guess we could use `UNORDERED` here as well.
+
+Finally you can see whole implementation [here][code]. Having this collector we can simply use it to
+find the most popular element in collection of any type:
+
+{% highlight java %}
+Lists.newArrayList(1, 1, 2, 2, 2, 3, 4, 5, 5)
+  .stream().collect(new MostPopular<>());
+
+Lists.newArrayList('a', 'b', 'c, 'c', 'c', 'd')
+  .stream().collect(new MostPopular<>());
+{% endhighlight %}
+
+
+
+[code]: http://pastebin.com/dXJYVVgp
+[source]: http://www.nurkiewicz.com/2014/07/introduction-to-writing-custom.html
+
+
