@@ -1,6 +1,6 @@
 ---
 title: The Mighty Monad
-date: 2015-05-16 12:24:48
+date: 2015-05-30 20:19:58
 tags: ["monad"]
 categories: programming scala
 ---
@@ -11,16 +11,15 @@ about monads. This post tries to explain what the monad is and why you should us
 
 # The definition
 
-What everyone is telling you is that a monad has its origins in category theory. This, of course, is
-true but do we really need that information to use it? The answer is: no! This is also said
-everywhere by everybody :)
+<p class="notice">This is raw definition of monad. Please note that you don't have to fully
+understand it to read the following sections. You can safely skip to the <em>Simpler definition</em>
+section.</p>
 
-Nevertheless I think it is a good idea to write down the definition and then simplify it for our
-needs. So here it goes!
+Let's start with something not simple at all! The monad definition:
 
 We can say that _M_ is a monad when:
 
-* there is generic type `M[T]`
+* it is generic type `M[T]`
 * there is a _unit_ function `T => M[T]`
 * there is a _flatMap_ function `(M[T], T => M[T]) => M[T]`
 
@@ -60,9 +59,10 @@ be) so I'll skip this for now.
 
 # Simpler definition
 
-The reality is that these laws are mainly important when you want to implement a monad yourself or
-you need to rely on one of these properties in your code. In fact when talking about monads most
-developers are thinking just about generic type _M[T]_ with _unit_ and _flatMap_ operations.
+The reality is that these monad laws are mainly important when you want to implement a monad
+yourself or you need to rely on one of these properties in your code. In fact when talking about
+monads most developers are thinking just about generic type _M[T]_ with _unit_ and _flatMap_
+operations.
 
 There is even more! There are types that we call a monads but they do not satisfy those laws! Let's
 take `Try[T]` for example. This monad is used to deal with possible exceptions that might occur
@@ -128,6 +128,8 @@ the point is that they are the result of those types (List, Map, Option) being a
 
 
 # Word about functional programming
+
+<p class="warning">This part contains dangerous amounts of Haskell.</p>
 
 Scala is kind-of functional programming language. You can write some parts functionally and other
 imperatively. This is great because by mixing the styles we can end up with code that is both

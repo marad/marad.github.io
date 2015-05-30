@@ -1,0 +1,31 @@
+@mixin alert-box($color, $icon) {
+  color: darken($color, 60%);
+  padding: 10px 20px 10px 40px;
+  margin: 10px 0;
+  border:1px solid darken($color, 5%);
+  background-color: $color;
+  &:before {
+    font-family: 'FontAwesome';
+    content: $icon;
+    font-size: 1.2em;
+    position: absolute;
+    margin-left: -25px;
+  }
+}
+
+.error {
+  @include alert-box(#ffecec, $fa-var-times-circle);
+}
+
+.success {
+  @include alert-box(#e9ffd9, $fa-var-check-circle);
+}
+
+.warning {
+  @include alert-box(#fff8c4, $fa-var-exclamation-circle);
+}
+
+.notice {
+  @include alert-box(#e3f7fc, $fa-var-info-circle);
+}
+
