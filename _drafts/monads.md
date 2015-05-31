@@ -12,8 +12,8 @@ about monads. This post tries to explain what the monad is and why you should us
 # Prerequisites
 
 To fully understand the examples here you should know at least basics of Scala language. You should
-also know [how to use `Option[T]`][option] type in Scala or at least know the Java's `Optional<T>`
-which I described [here][optional]. In the section about pure functional languages I used a bit of
+also know [how to use `Option[T]`][scala-option] type in Scala or at least know the Java's `Optional<T>`
+which I described [here][java-optional]. In the section about pure functional languages I used a bit of
 Haskell, but I tried to make the examples as clear as I could for those who don't know it.
 
 # The definition
@@ -256,5 +256,5 @@ and everything was clear. I hope that it just _clicked_ for you today :)
 If you have any questions please leave a comment below!
 
 [do-notation]: https://wiki.haskell.org/Monad
-[option]: http://www.tutorialspoint.com/scala/scala_options.htm
-[optional]: /programming/java/2015/04/19/java-optional.html
+[scala-option]: http://www.tutorialspoint.com/scala/scala_options.htm
+[java-optional]: /programming/java/2015/04/19/java-optional.html
