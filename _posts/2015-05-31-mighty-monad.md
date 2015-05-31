@@ -237,7 +237,7 @@ In Scala it would look like:
 def main(): Unit = getChar.flatMap(putChar)
 {% endhighlight %}
 
-The `getChar` is a monad. If we invoke `flatMap` on it gives us a key pressed on the keyboard as a
+The `getChar` function returns a monad. If we invoke `flatMap` on it gives us a key pressed on the keyboard as a
 parameter to our function. Our function here is `putChar`. It takes one char and returns a monad
 back. The returned monad is empty (like `Unit` in Scala) so the value is not interesting. The
 `putChar` function does something else behind the scenes. It writes the character to the standard
