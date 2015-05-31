@@ -1,6 +1,6 @@
 ---
 title: The Mighty Monad
-date: 2015-05-30 20:19:58
+date: 2015-05-31 11:52:40
 tags: ["monad"]
 categories: programming scala
 ---
