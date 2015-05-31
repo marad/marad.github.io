@@ -13,7 +13,8 @@ about monads. This post tries to explain what the monad is and why you should us
 
 To fully understand the examples here you should know at least basics of Scala language. You should
 also know [how to use `Option[T]`][option] type in Scala or at least know the Java's `Optional<T>`
-which I described [here][optional]. In the section about pure functional languages I used Haskell.
+which I described [here][optional]. In the section about pure functional languages I used a bit of
+Haskell, but I tried to make the examples as clear as I could for those who don't know it.
 
 # The definition
 
@@ -147,32 +148,30 @@ languages like Haskell.
 You see, in pure functional languages you cannot define the order of operations. You can just define
 some equivalences. What do I mean? Take a look:
 
-{% highlight haskell %}
-add :: Integer -> Integer -> Integer
-add a b = a + b
+{% highlight scala %}
+def add(a: Int, b: Int) = a + b
 {% endhighlight %}
 
 We are used to call this a function definition but what really happens here? We just tell that the
-`add a b` string can be replaced with `a + b` string. In fact we could evaluate every pure
-functional code just by replacing strings!
+`add(x,y)` string can be replaced with `x + y` string on the code level. In fact we could evaluate
+pure functional code just by replacing strings!
 
 Going back to the monads. In pure functional languages to define the order of computation you would
 have to invoke a function on a call to function etc.:
 
-{% highlight haskell %}
-f $ g $ h x
+{% highlight scala %}
+f(g(h(x)))
 {% endhighlight %}
 
-This is equivalent for `f(g(h(x)))` in Scala. You can see that here we have to evaluate `h x` then
-pass the value to `g` and finally to `f`. Try to imagine bigger program written like that. Well yes,
-it would be unreadable!
+You can see that here we have to evaluate `h(x)` then pass the value to `g` and finally to `f`. Try
+to imagine bigger program written like that. Well yes, it would be unreadable!
 
 Now we could scream: _Monads to the rescue!_. But let's not. If you look again at the code to find
 the most popular element in list you can see that we strictly defined the order for the operations.
-This is exactly what we use in Haskell to pretend that we are doing imperative code.
 
-Of course Haskell has some syntactic sugar on top of it so instead of writing `flatMap` (which in
-Haskell is `>>=`) you can write it imperatively-ish. The `do` notation:
+This is exactly what we use in Haskell to pretend that we are doing imperative code. Of course
+Haskell has some syntactic sugar on top of it so instead of writing `flatMap` (which in Haskell is
+`>>=`) you can write it imperatively-ish. The `do` notation:
 
 {% highlight haskell %}
 do
@@ -182,7 +181,13 @@ do
   z <- func2 y
 {% endhighlight %}
 
-Which is exactly the same as:
+What is going on here? The `thing1` and `thing2` are monadic values (we can call `flatMap` on them).
+The `func1` and `func2` returns a monadic values. What is going on here is that first we get the
+value form `thing1` and name it `x`. Then we pass it as a value to the `func1` which returns another
+monad. Then we take value from the monad and name it `y`... You see where this is going. This
+clearly defines the order of operations.
+
+Example above is exactly the same as:
 
 {% highlight haskell %}
 thing1 >>= (\x -> func1 x >>= (\y -> thing2
@@ -192,10 +197,11 @@ thing1 >>= (\x -> func1 x >>= (\y -> thing2
 You see that the `do` notation is a bit more readable :) This example is taken from [Haskell
 Wiki][do-notation].
 
+
 ## The state and side effects
 
 Another thing is that in Scala we can talk about mutable and immutable state. In pure functional
-programming there is no state at all! All there is are just arguments passed to functions. That's the
+programming there is no state at all! There are only arguments passed to functions. That's the
 closest thing to state you can get.
 
 But there is state in the world. Our hard drives have state. Keyboard has state. There is a lot of
@@ -210,21 +216,42 @@ main = do
 {% endhighlight %}
 
 This program, as you might suspect, reads one character from the standard input and writes it to
-standard output. To put it simply: awaits for keyboard button to be pressed and prints the button to
+standard output. To put it simply: awaits for keyboard button to be pressed and prints the letter to
 the console.
 
 Here you can see that `getChar` does have some kind of state as the value seems to materialize from
 nothing - it doesn't expect any arguments. So what happens here? Well - the input/output operations
-are wrapped with a monad which acts here as a gate between our imperative and stateful world and the
-world of pure functions. All this achieved with simple `flatMap` :)
+are wrapped with a monad which acts here as a gate between our stateful world and the world of pure
+functions.
+
+We can rewrite it using `flatMap` (which in Haskell is `>>=`):
+
+{% highlight haskell %}
+main :: IO ()
+main = getChar >>= putChar
+{% endhighlight %}
+
+In Scala it would look like:
+
+{% highlight scala %}
+def main(): Unit = getChar.flatMap(putChar)
+{% endhighlight %}
+
+The `getChar` is a monad. If we invoke `flatMap` on it gives us a key pressed on the keyboard as a
+parameter to our function. Our function here is `putChar`. It takes one char and returns a monad
+back. The returned monad is empty (like `Unit` in Scala) so the value is not interesting. The
+`putChar` function does something else behind the scenes. It writes the character to the standard
+output. This is side effect that we wanted. The ability to talk to stateful world.
+
+All this is thanks to humble `flatMap` :)
 
 # Summary
 
-Thanks for reading! I hope that you will not be frightened by the _monad_ word anymore! Those are
+Thanks for reading! I hope that you will not be frightened by the _monad_ word anymore! These are
 useful little creatures. They are easy to use when you get the hang of them, but quite hard to learn
-(and explain!). I really hope that this post was helpful to you because when I wanted to learn about
+(and explain!). I really hope that this post was helpful to you because when I wanted to learn
 monads the first time I couldn't understand a single thing about them. Then something just _clicked_
-and everything was so obvious. I hope that it just _clicked_ for you today :)
+and everything was clear. I hope that it just _clicked_ for you today :)
 
 If you have any questions please leave a comment below!
 
