@@ -9,11 +9,17 @@ When you begin to learn functional programming everybody is telling you that pur
 side effects are the only way to go. This is fine up to the point. Sooner or later you will hear
 about monads. This post tries to explain what the monad is and why you should use it.
 
+# Prerequisites
+
+To fully understand the examples here you should know at least basics of Scala language. You should
+also know [how to use `Option[T]`][option] type in Scala or at least know the Java's `Optional<T>`
+which I described [here][optional]. In the section about pure functional languages I used Haskell.
+
 # The definition
 
 <p class="notice">This is raw definition of monad. Please note that you don't have to fully
 understand it to read the following sections. You can safely skip to the <em>Simpler definition</em>
-section.</p>
+section. Having said that, I encourage you to face this definition. It may help you later on.</p>
 
 Let's start with something not simple at all! The monad definition:
 
@@ -30,7 +36,7 @@ To make things even worse, there are three monad laws:
 * Associativity: `(m flatMap f) flatMap g == m flatMap (f flatMap g)`
 
 Let me clarify this definition a bit. Leaving the laws for later let us jump back to the _M_ type
-and the methods _unit_ and _flatMap_.  Type _M_ is just regular generic type like `Option[T]` or
+and the _unit_ and _flatMap_ functions.  Type _M_ is just regular generic type like `Option[T]` or
 `Try[T]`.  The _unit_ function takes the value of type _T_ and wraps it with a monadic type. For
 `Option[T]` the _unit_ operation is simple `Some(t: T)`.  Lastly - the _flatMap_. Literature refers
 to it as the _bind_ operation. I decided to call it _flatMap_ here so it sounds more familiar. It,
@@ -138,7 +144,7 @@ languages like Haskell.
 
 ## The order
 
-You see. In pure functional languages you cannot define the order of operations. You can just define
+You see, in pure functional languages you cannot define the order of operations. You can just define
 some equivalences. What do I mean? Take a look:
 
 {% highlight haskell %}
@@ -223,4 +229,5 @@ and everything was so obvious. I hope that it just _clicked_ for you today :)
 If you have any questions please leave a comment below!
 
 [do-notation]: https://wiki.haskell.org/Monad
-
+[option]: http://www.tutorialspoint.com/scala/scala_options.htm
+[optional]: /programming/java/2015/04/19/java-optional.html
