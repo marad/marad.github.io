@@ -156,8 +156,8 @@ We are used to call this a function definition but what really happens here? We 
 `add a b` string can be replaced with `a + b` string. In fact we could evaluate every pure
 functional code just by replacing strings!
 
-Going back to the monads, you cannot define the order of computation. To do this you would have to
-invoke a function on a call to function etc.:
+Going back to the monads. In pure functional languages to define the order of computation you would
+have to invoke a function on a call to function etc.:
 
 {% highlight haskell %}
 f $ g $ h x
