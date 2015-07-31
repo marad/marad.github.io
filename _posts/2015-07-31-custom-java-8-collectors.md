@@ -1,11 +1,11 @@
 ---
 title: Custom Collectors in Java 8
-date: 2015-05-25 20:57:56
+date: 2015-07-31 08:20:10
 tags: ["collector", "stream", "java 8"]
 categories: programming java
 ---
 
-Java 8 sure bring a few interesting features. One of them are definitely the streams. Internet is
+Java 8 sure did bring a few interesting features. One of them are definitely the streams. Internet is
 full of the instructions on how to create and use them. Today I'd like to talk about something a
 little bit different - collectors.
 
@@ -37,9 +37,10 @@ interface Collector<T,A,R> {
 {% endhighlight %}
 
 As you can see the collector is a generic type that has type parameters named _T_, _A_, and _R_.
-First one (_T_) is the stream type. For example for `Stream<String>` the _T_ is `String`. Second
-(_A_) is the accumulator type. This is the type that is used to store values while processing the
-stream. Finally the _R_ is returned type. This is what the collector actually returns.
+First one (_T_) is the type of a stream we want to collect. For example for `Stream<String>`
+the _T_ is `String`. Second (_A_) is the accumulator type. This is the type that is used to store
+values while processing the stream. Finally the _R_ is returned type. This is what the collector
+actually returns.
 
 This means that you can collect `Stream<T>` to value of type `R` using some helper variables of
 type `A` while collecting.
@@ -81,8 +82,8 @@ times.
 
 In terms of a collector. We want to collect the stream of type _X_ to single value of type
 _Optional<X>_. This value should be the most popular item. We use optional here because if we supply
-empty list then we do not have any most popular item there. As the intermediate I suggest using
-`Map<X, Integer>` to store elements and their occurrence count. I'll explain this in detail later.
+empty list then we do not have any most popular item there. As the accumulator type I suggest using
+`Map<X, Integer>` to store elements with their occurrence count. I'll explain this in detail later.
 So the collector generic parameters should be `Collector<X, Map<X,Integer>, Optional<X>>`
 
 To implement the collector we can simply implement the interface:
@@ -112,12 +113,7 @@ Moving on, to the accumulator:
 public BiConsumer<Map<T, Integer>, T> accumulator() {
   return (acc, elem) -> {
     Integer value = acc.get(elem);
-    if (value == null) {
-      value = 1;
-    } else {
-      value += 1;
-    }
-    acc.put(elem, value);
+    acc.put(elem, Optional.ofNullable(value).orElse(1));
   };
 }
 {% endhighlight %}
@@ -144,14 +140,14 @@ public BinaryOperator<Map<T, Integer>> combiner() {
 
 Well... this is not what you expected at all. I can tell! Let me explain myself. The combiner method
 is used when the process can be parallelized. This method is here to merge processing results from
-different threads. Every thread gets part of the stream to collect, and at the end all the
+different threads. Every thread gets part of the stream to collect, and in the end all the
 resulting accumulators are merged by this method. In this particular collector the implementation
 for this method can be a bit tricky, but is not crucial so I just let it go :)
 
 This method is not used unless you create `parallelStream()` instead of `stream()` from the
 collection.
 
-Let's almost finish with finisher:
+Let's almost finish with finisher method implementation:
 
 {% highlight java %}
 @Override
@@ -162,6 +158,7 @@ public Function<Map<T, Integer>, Optional<T>> finisher() {
 }
 {% endhighlight %}
 
+Here we want to extract the final result from accumulator.
 This implementation is pretty straight forward if you are used to the stream-way of processing data.
 We have our accumulator `acc` which is a map of elements with their occurrence count. We create a
 stream from this map's entry set and using reduce we find the value of type `Optional<Map.Entry<T,
@@ -189,13 +186,17 @@ find the most popular element in collection of any type:
 Lists.newArrayList(1, 1, 2, 2, 2, 3, 4, 5, 5)
   .stream().collect(new MostPopular<>());
 
-Lists.newArrayList('a', 'b', 'c, 'c', 'c', 'd')
+Lists.newArrayList('a', 'b', 'c', 'c', 'c', 'd')
   .stream().collect(new MostPopular<>());
 {% endhighlight %}
 
+#Summing up
 
+Collectors are in fact a Java way of defining custom [folds][folds]. As it's the Java way it has to
+be a little verbose ;) Anyway - folds are great thus collectors are great too! Thanks for reading!
 
-[code]: http://pastebin.com/dXJYVVgp
+[code]: http://pastebin.com/k5QPqn7Q
+[folds]: https://en.wikipedia.org/wiki/Fold_(higher-order_function)
 [source]: http://www.nurkiewicz.com/2014/07/introduction-to-writing-custom.html
 
 
