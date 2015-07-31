@@ -81,7 +81,7 @@ occurs the most. So in `a, a, a, b, b, c` the most popular is obviously `a` beca
 times.
 
 In terms of a collector. We want to collect the stream of type _X_ to single value of type
-_Optional<X>_. This value should be the most popular item. We use optional here because if we supply
+_Optional&lt;X&gt;_. This value should be the most popular item. We use optional here because if we supply
 empty list then we do not have any most popular item there. As the accumulator type I suggest using
 `Map<X, Integer>` to store elements with their occurrence count. I'll explain this in detail later.
 So the collector generic parameters should be `Collector<X, Map<X,Integer>, Optional<X>>`
