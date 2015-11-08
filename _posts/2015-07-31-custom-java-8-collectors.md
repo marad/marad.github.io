@@ -145,7 +145,8 @@ Well... this is not what you expected at all. I can tell! Let me explain myself.
 is used when the process can be parallelized. This method is here to merge processing results from
 different threads. Every thread gets part of the stream to collect, and in the end all the
 resulting accumulators are merged by this method. In this particular collector the implementation
-for this method can be a bit tricky, but is not crucial so I just let it go :)
+for this method can be a bit tricky, but is not crucial so I just let it go :) We will not use
+distributed processing anyway.
 
 This method is not used unless you create `parallelStream()` instead of `stream()` from the
 collection.
