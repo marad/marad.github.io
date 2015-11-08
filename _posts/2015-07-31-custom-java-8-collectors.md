@@ -113,7 +113,10 @@ Moving on, to the accumulator:
 public BiConsumer<Map<T, Integer>, T> accumulator() {
   return (acc, elem) -> {
     Integer value = acc.get(elem);
-    acc.put(elem, Optional.ofNullable(value).orElse(1));
+    acc.put(elem, Optional
+        .ofNullable(value)
+        .map(v -> v + 1)
+        .orElse(1));
   };
 }
 {% endhighlight %}
