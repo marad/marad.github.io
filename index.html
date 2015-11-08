@@ -1,24 +1,15 @@
----
-layout: default
----
-
-<div class="home">
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
-            {{ post.title }}
-            <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-          </a>
-        </h2>
-        {{ post.excerpt }}
-        <a href="{{ post.url | prepend: site.baseurl }}">Read more »</a>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
-</div>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <style>
+            .jumbo {
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="jumbo">
+            <h1>Visit my Blog at: <a href="http://blog.radoszewski.pl">http://blog.radoszewski.pl</a></h1>
+        </div>
+    </body>
+</html>
